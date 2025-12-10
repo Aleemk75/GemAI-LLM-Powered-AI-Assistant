@@ -48,7 +48,7 @@ const App = () => {
       window.google.accounts.id.disableAutoSelect();
     }
     localStorage.removeItem('authToken');
-    localStorage.removeItem('user');
+    localStorage.removeItem('authUser');
   };
 
   const providerValues = {

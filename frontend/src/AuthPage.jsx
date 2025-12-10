@@ -72,6 +72,7 @@ const AuthPage = ({ setUser, setToken }) => {
 
       if (data.success) {
         localStorage.setItem("authToken", data.token);
+        localStorage.setItem("authUser", JSON.stringify(data.user));
         setToken(data.token);
         setUser(data.user);
       } else {
