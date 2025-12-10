@@ -25,10 +25,9 @@ export const authMiddleware = async (req, res, next) => {
     // await redisClient.del(`user:${userId}`);
 
     const cachedUser = await redisClient.get(`user:${userId}`);
-     console.log(cachedUser);
+    //  console.log(cachedUser);
 
     if (cachedUser) {
-      console.log("redis in auth middleware");
       req.user = cachedUser;
       return next();
     }

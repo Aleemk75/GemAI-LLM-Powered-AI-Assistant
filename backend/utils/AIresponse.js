@@ -1,48 +1,48 @@
 import "dotenv/config";
+import fetch from "node-fetch"; // only if Node <18
 
-export async function getGemeniResponse(prompt) {
-  const API_KEY = process.env.GEMINI_API_KEY;
+export async function getGroqResponse(prompt) {
+  const API_KEY = process.env.GROQ_API_KEY;
   if (!API_KEY) {
-    console.error("API key not found. Please set the GEMINI_API_KEY environment variable.");
+    console.error("GROQ_API_KEY missing in env");
     return null;
   }
 
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${API_KEY}`;
+  const url = "https://api.groq.com/openai/v1/chat/completions";
 
   const payload = {
-    contents: [
-      {
-        parts: [{ text: prompt }],
-      },
+    model: "llama-3.3-70b-versatile", // replace with a valid Groq model
+    messages: [
+      { role: "user", content: prompt }
     ],
-  };
-
-  const options = {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(payload),
+    temperature: 0.7,
+    max_tokens: 1000
   };
 
   try {
-    const response = await fetch(url, options);
+    const res = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${API_KEY}`
+      },
+      body: JSON.stringify(payload)
+    });
 
-    if (!response.ok) {
-      console.error(`❌ API request failed with status: ${response.status}`);
-      const errorData = await response.text();
-      console.error("Response:", errorData);
+    if (!res.ok) {
+      const errText = await res.text();
+      console.error("API request failed with status:", res.status);
+      console.error("Response:", errText);
       return null;
     }
 
-    const data = await response.json();
-
-    const generatedText =
-      data?.candidates?.[0]?.content?.parts?.[0]?.text || "⚠️ No response text found.";
+    const data = await res.json();
+    // Groq returns OpenAI-compatible choices array
+    const generatedText = data?.choices?.[0]?.message?.content || "No response";
 
     return generatedText.trim();
-  } catch (error) {
-    console.error("❌ Error while fetching Gemini response:", error.message);
+  } catch (err) {
+    console.error("Error while fetching Groq response:", err.message);
     return null;
   }
 }

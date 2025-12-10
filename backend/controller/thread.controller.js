@@ -1,5 +1,5 @@
 import { Thread } from "../models/thread.model.js";
-import { getGemeniResponse } from "../utils/AIresponse.js";
+import { getGroqResponse } from "../utils/AIresponse.js";
 
 export const getAllThreads = async (req, res) => {
 
@@ -102,7 +102,7 @@ export const chat = async (req, res) => {
 
         // get response from AI
 
-        const assistantMsgResponse = await getGemeniResponse(message); //message = prompt for AI
+        const assistantMsgResponse = await getGroqResponse(message); //message = prompt for AI
         if (!assistantMsgResponse) {
             return res.status(400).json({ error: "Error in AI Assistant Response" })
         }
