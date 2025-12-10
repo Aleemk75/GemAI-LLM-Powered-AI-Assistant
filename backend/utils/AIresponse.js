@@ -2,7 +2,7 @@ import "dotenv/config";
 import fetch from "node-fetch"; // only if Node <18
 
 export async function getGroqResponse(prompt) {
-  const API_KEY = process.env.GROQ_API_KEY;
+  const API_KEY = process.env.GROQ_API_KEY?.trim();
   if (!API_KEY) {
     console.error("GROQ_API_KEY missing in env");
     return null;
