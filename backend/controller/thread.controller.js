@@ -17,7 +17,11 @@ export const getUserThreads = async (req, res) => {
 
     try {
         const userId = req.user.userId;
-        const userThreads = await Thread.find({ user: userId }).sort({ createdAt: -1 }); //-1 → descending (newest first) 1 → ascending (oldest first)
+        
+        const userThreads = await Thread.find({ user: userId })
+            .select('threadId title createdAt')
+            .sort({ createdAt: -1 }); 
+
         res.status(200).json(userThreads);
 
     } catch (error) {
@@ -102,10 +106,17 @@ export const chat = async (req, res) => {
 
         // get response from AI
 
-        const assistantMsgResponse = await getGroqResponse(message); //message = prompt for AI
-        if (!assistantMsgResponse) {
-            return res.status(400).json({ error: "Error in AI Assistant Response" })
+        const aiResponse = await getGroqResponse(message); //message = prompt for AI
+
+        // Check if AI returned an error
+        if (aiResponse.error) {
+            return res.status(503).json({
+                error: aiResponse.message,
+                errorType: aiResponse.type
+            });
         }
+
+        const assistantMsgResponse = aiResponse.message;
         thread.messages.push({ role: "assistant", content: assistantMsgResponse });
         thread.updatedAt = new Date();
         // now saving the thread
