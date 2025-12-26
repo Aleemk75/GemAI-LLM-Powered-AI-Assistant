@@ -1,19 +1,30 @@
-*{
-    color: #ececec;
-    font-family:  Roboto , 'Open Sans' , 'Helvitaca Neue' , 'sans-sarif' ;
+* {
+  color: #ececec;
+  font-family: Roboto, 'Open Sans', 'Helvitaca Neue', 'sans-sarif';
 }
 
-body{
-    margin: 0;
-    padding: 0;
+body {
+  margin: 0;
+  padding: 0;
 }
 
-.app{
-      background-color: #212121;
-      display: flex;
+.app {
+  background-color: #212121;
+  display: flex;
+  height: 100vh;
+}
+
+@media (max-width: 768px) {
+  .app {
+    flex-direction: column;
+    height: auto;
+  }
 }
 
 *::selection {
-  background-color:  #3b82f6 !important; /* your GemAI accent color */
-  color: #ffffff !important;            /* white text for readability */     /* text color when selected */
+  background-color: #3b82f6 !important;
+  /* your GemAI accent color */
+  color: #ffffff !important;
+  /* white text for readability */
+  /* text color when selected */
 }

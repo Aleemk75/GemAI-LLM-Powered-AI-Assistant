@@ -14,6 +14,7 @@ const App = () => {
   const [prevChats, setPrevChats] = useState([]); // stores all chats of curr threads
   const [newChat, setNewChat] = useState(true);
   const [allThreads, setALLThreads] = useState([]);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   // Authentication states
   const [user, setUser] = useState(null);
@@ -61,7 +62,9 @@ const App = () => {
     // Add authentication values
     user,
     token,
-    handleLogout
+    handleLogout,
+    isSidebarOpen,
+    setIsSidebarOpen
   };
 
   // Login screen

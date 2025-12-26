@@ -8,11 +8,12 @@ const API = import.meta.env.VITE_API_URL;
 //  || "https://gemai-a-smart-writing-assistant.onrender.com/api";
 const ChatWindow = () => {
 
-  const { prompt, setPrompt, reply, setReply, currThreadId, prevChats, setPrevChats, newChat, setNewChat, token, handleLogout } = useContext(MyContext);
+  const { prompt, setPrompt, reply, setReply, currThreadId, prevChats, setPrevChats, newChat, setNewChat, token, handleLogout, setIsSidebarOpen } = useContext(MyContext);
   const [loading, setLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
   const getReply = async () => {
+    if (!prompt.trim()) return; // Don't send if input is empty
     setLoading(true);
     setNewChat(false);
     // console.log("message:", prompt, "threadId", currThreadId);
@@ -84,7 +85,12 @@ const ChatWindow = () => {
   return (
     <div className="chatWindow">
       <div className="navbar">
-        <span>GemAI <i className="fa-solid fa-chevron-down"></i></span>
+        <div className="nav-left">
+          <button className="menu-toggle" onClick={() => setIsSidebarOpen(true)}>
+            <i className="fa-solid fa-bars"></i>
+          </button>
+          <span>GemAI <i className="fa-solid fa-chevron-down"></i></span>
+        </div>
         <div className="upgradeDiv">
           <span><button>Upgrade to Plus</button></span>
         </div>
@@ -108,11 +114,18 @@ const ChatWindow = () => {
             placeholder={newChat ? "How can I help you today?" : "Say what’s on your mind…"}
             value={prompt}
             onChange={(e) => setPrompt(e.target.value)}
-            onKeyDown={(e) => e.key === 'Enter' ? getReply() : ""}
+            onKeyDown={(e) => e.key === 'Enter' && prompt.trim() ? getReply() : ""}
           >
 
           </input>
-          <div id="submit" onClick={getReply}><i className="fa-solid fa-paper-plane"></i></div>
+          <div
+            id="submit"
+            onClick={getReply}
+            className={!prompt.trim() ? "disabled" : ""}
+            style={{ opacity: !prompt.trim() ? 0.5 : 1, cursor: !prompt.trim() ? 'not-allowed' : 'pointer' }}
+          >
+            <i className="fa-solid fa-paper-plane"></i>
+          </div>
         </div>
         <p className="info">
           GemAI can make mistakes. Check important info. See Cookie Preferences.

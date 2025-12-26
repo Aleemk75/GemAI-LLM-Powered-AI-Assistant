@@ -1,12 +1,44 @@
 .sidebar {
-    background-color:#1F1E1D;
+    background-color: #1F1E1D;
     color: #f4f3ee;
     height: 100vh;
-    width: 350px;
+    width: 300px;
+    /* Reduced from 350px */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     border-right: 1px solid rgba(177, 173, 161, 0.2);
+    transition: transform 0.3s ease;
+    z-index: 1001;
+}
+
+.sidebar-header {
+    display: none;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    border-bottom: 1px solid rgba(177, 173, 161, 0.2);
+}
+
+.close-sidebar {
+    background: transparent;
+    border: none;
+    color: #f4f3ee;
+    font-size: 24px;
+    cursor: pointer;
+    margin: 0;
+    padding: 5px;
+}
+
+.sidebar-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
 }
 
 button {
@@ -16,7 +48,7 @@ button {
     margin: 10px;
     padding: 10px;
     border-radius: 8px;
-    
+
     background-color: transparent;
     border: solid 0.1px rgba(177, 173, 161, 0.3);
     cursor: pointer;
@@ -29,17 +61,19 @@ button:hover {
     border-color: #c15f3c;
 }
 
-.logoDiv{
-display: flex;
-justify-content: center;
-  /* border: 1px solid #c15f3c; */
+.logoDiv {
+    display: flex;
+    justify-content: center;
+    /* border: 1px solid #c15f3c; */
 }
-.logo1{
-  height: 32px;
-  width: 32px;
 
-   transform: scale(5);
+.logo1 {
+    height: 32px;
+    width: 32px;
+
+    transform: scale(5);
 }
+
 button span {
     font-size: 20px;
     color: #f4f3ee;
@@ -187,26 +221,53 @@ button:focus-visible,
 
 
 .sidebar-user {
-  display: flex;
-  align-items: center;
-  gap: 3px; /* small space between circle and name */
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    /* small space between circle and name */
 }
 
 .user-circle {
-  width: 35px;
-  height: 35px;
-  background-color: #c15f3c; /* terracotta circle */
-  color: white;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  font-size: 16px;
+    width: 35px;
+    height: 35px;
+    background-color: #c15f3c;
+    /* terracotta circle */
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 16px;
 }
 
 .username {
-  font-size: 16px;
-  color: #f4f3ee;
-  padding-left: 5px;
+    font-size: 16px;
+    color: #f4f3ee;
+    padding-left: 5px;
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        position: fixed;
+        left: 0;
+        top: 0;
+        transform: translateX(-100%);
+    }
+
+    .sidebar.open {
+        transform: translateX(0);
+    }
+
+    .sidebar-overlay {
+        display: block;
+    }
+
+    .sidebar-header {
+        display: flex;
+    }
+
+    .logoDiv {
+        display: none !important;
+    }
 }

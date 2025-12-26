@@ -1,7 +1,7 @@
 /* ChatWindow.css - Color Palette: #c15f3c, #b1ada1, #f4f3ee, #ffffff */
 
 .chatWindow {
-    background-color: #262624 ;
+    background-color: #262624;
     height: 100vh;
     width: 100%;
     display: flex;
@@ -19,17 +19,33 @@
     max-height: 70px;
     justify-content: space-between;
     align-items: center;
-    background-color:#262624;
+    background-color: #262624;
     border-bottom: 1px solid rgba(177, 173, 161, 0.3);
 }
 
 .navbar span {
-    margin: 1rem 2rem;
     color: #ffffff;
     font-weight: 600;
 }
 
-.upgradeDiv span button{
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 1rem 2rem;
+}
+
+.menu-toggle {
+    display: none;
+    background: transparent;
+    border: none;
+    color: #ffffff;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 0;
+}
+
+.upgradeDiv span button {
     background: #c15f3c;
 }
 
@@ -72,7 +88,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    color: #ffffff ;
+    color: #ffffff;
 }
 
 input {
@@ -83,20 +99,22 @@ input {
     padding: 20px;
     font-size: 1rem;
     border-radius: 14px;
-    box-shadow: 
+    box-shadow:
         0 2px 8px rgba(0, 0, 0, 0.05),
         0 0 0 1px rgba(177, 173, 161, 0.1);
     transition: all 0.2s;
 }
+
 input::placeholder {
-    color: #b1ada1; /* matches your palette */
+    color: #b1ada1;
+    /* matches your palette */
     opacity: 1;
 }
 
 input:focus {
     outline: none;
     border-color: #c15f3c;
-    box-shadow: 
+    box-shadow:
         0 4px 12px rgba(193, 95, 60, 0.1),
         0 0 0 2px rgba(193, 95, 60, 0.2);
 }
@@ -119,11 +137,22 @@ input:focus {
     color: #c15f3c;
     transform: scale(1.1);
 }
-#submit i{
+
+#submit i {
     color: #c15f3c;
 }
+
 #submit i:hover {
     color: #b1ada1;
+}
+
+@media (max-width: 768px) {
+    #submit {
+        right: 5px;
+        /* bring closer to edge */
+        z-index: 20;
+        /* ensure on top */
+    }
 }
 
 .info {
@@ -210,4 +239,66 @@ input:focus {
 
 .messages::-webkit-scrollbar-thumb:hover {
     background: #c15f3c;
+}
+
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+        background: transparent;
+        border: none;
+        color: #ffffff;
+        font-size: 20px;
+        cursor: pointer;
+        padding: 0;
+    }
+
+    /* Mobile adjustments for submit button */
+
+    .navbar span {
+        font-size: 1.1rem;
+    }
+
+    .barIconDiv {
+        margin: 1rem;
+    }
+
+    .messages {
+        padding: 1rem;
+    }
+
+    .message {
+        max-width: 85%;
+    }
+
+    .inputBox {
+        padding-right: 50px;
+        /* make space for submit button */
+    }
+
+    max-width: 90%;
+}
+
+input {
+    padding: 15px;
+    font-size: 0.9rem;
+}
+
+.upgradeDiv {
+    display: none;
+}
+
+.dropDown {
+    right: 1rem;
+    top: 3.5rem;
+}
+}
+
+@media (max-width: 480px) {
+    .message {
+        max-width: 95%;
+    }
+
+    .info {
+        font-size: 0.7rem;
+    }
 }
