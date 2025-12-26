@@ -5,7 +5,7 @@ import { v1 as uuidv1 } from "uuid"
 const API = import.meta.env.VITE_API_URL;
 //  || "https://gemai-a-smart-writing-assistant.onrender.com/api";
 const Sidebar = () => {
-  const { allThreads, setALLThreads, setNewChat, currThreadId, setPrompt, setReply, setCurrThreadId, prevChats, setPrevChats, user, handleLogout, isSidebarOpen, setIsSidebarOpen } = useContext(MyContext);
+  const { allThreads, setALLThreads, newChat, setNewChat, currThreadId, setPrompt, setReply, setCurrThreadId, prevChats, setPrevChats, user, handleLogout, isSidebarOpen, setIsSidebarOpen } = useContext(MyContext);
   const [isLoadingThread, setIsLoadingThread] = useState(false);
 
   const getUserThreads = async () => {
@@ -37,6 +37,15 @@ const Sidebar = () => {
     getUserThreads();
   }, [currThreadId])
 
+  // Restore active chat on load if applicable
+  useEffect(() => {
+    // If we have a currThreadId on mount, it's not a new chat, and we have no messages yet...
+    if (currThreadId && !newChat && prevChats.length === 0) {
+      // Fetch the messages for this thread
+      getThread(currThreadId);
+    }
+  }, []);
+
   //create a new chat button
   const createNewChat = () => {
     setNewChat(true)
@@ -60,19 +69,28 @@ const Sidebar = () => {
           'Authorization': `Bearer ${localStorage.getItem('authToken')}`
         }
       });
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch thread');
+      }
+
       const res = await response.json();
-      console.log(res);
+      // console.log(res);
 
       setPrevChats(res);
       setNewChat(false);
       setReply(null);
-      setIsLoadingThread(false);
+
       // Close sidebar on mobile after selecting a thread
       if (window.innerWidth <= 768) {
         setIsSidebarOpen(false);
       }
     } catch (error) {
       console.log("error in getThread function:", error);
+      // If thread not found (e.g. deleted or invalid ID), revert to new chat
+      createNewChat();
+    } finally {
+      setIsLoadingThread(false);
     }
   }
 

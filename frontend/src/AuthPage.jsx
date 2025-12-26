@@ -2,14 +2,14 @@ import { useEffect, useState } from 'react';
 import './AuthPage.css';
 
 const API_URL = import.meta.env.VITE_API_URL;
-const  GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID;
+const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID;
 
 const AuthPage = ({ setUser, setToken }) => {
   const [mode, setMode] = useState('login'); // 'login', 'signup', 'verify'
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
-  
+
   // Form states
   const [formData, setFormData] = useState({
     name: '',
@@ -35,8 +35,8 @@ const AuthPage = ({ setUser, setToken }) => {
 
         window.google.accounts.id.renderButton(
           document.getElementById('googleSignInButton'),
-          { 
-            theme: 'outline', 
+          {
+            theme: 'outline',
             size: 'large',
             width: 340,
             text: 'signin_with',
@@ -150,7 +150,7 @@ const AuthPage = ({ setUser, setToken }) => {
 
       if (res.ok && data.token) {
         localStorage.setItem("authToken", data.token);
-         localStorage.setItem("authUser", JSON.stringify(data.user));
+        localStorage.setItem("authUser", JSON.stringify(data.user));
         setToken(data.token);
         // Fetch user profile or set basic user data
         setUser(data.user);
@@ -186,9 +186,9 @@ const AuthPage = ({ setUser, setToken }) => {
 
       if (res.ok && data.token) {
         localStorage.setItem("authToken", data.token);
-         localStorage.setItem("authUser", JSON.stringify(data.user));
+        localStorage.setItem("authUser", JSON.stringify(data.user));
         setToken(data.token);
-        setUser(data.user );
+        setUser(data.user);
       } else {
         setError(data.message || 'Verification failed');
       }
@@ -207,13 +207,11 @@ const AuthPage = ({ setUser, setToken }) => {
         <div className="auth-brand">
           <div className="brand-content">
             <div className="brand-icon">
-              <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
-              </svg>
+              <img src="/gemAILogo.png" alt="GemAI Logo" style={{ width: '64px', height: '64px', transform: 'scale(1.5)' }} />
             </div>
             <h1 className="brand-title">Gem-AI </h1>
             <p className="brand-subtitle">Intelligent conversations powered by AI </p>
-            
+
             <div className="brand-features">
               <div className="brand-feature">
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
@@ -233,12 +231,7 @@ const AuthPage = ({ setUser, setToken }) => {
                 </svg>
                 <span>Secure & encrypted</span>
               </div>
-                <div className="brand-feature">
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                </svg>
-                <span> Demo : 'Email':'gem12345@gmail.com' , 'Password':'gem12'</span>
-              </div>
+
             </div>
           </div>
         </div>
@@ -251,7 +244,7 @@ const AuthPage = ({ setUser, setToken }) => {
               <div className="auth-form">
                 <h2 className="form-title">Sign in to your account</h2>
                 <p className="form-subtitle">
-                  Don't have an account? 
+                  Don't have an account?
                   <button className="link-button" onClick={() => setMode('signup')}>Sign Up</button>
                 </p>
 
@@ -302,7 +295,7 @@ const AuthPage = ({ setUser, setToken }) => {
               <div className="auth-form">
                 <h2 className="form-title">Create your account</h2>
                 <p className="form-subtitle">
-                  Already have an account? 
+                  Already have an account?
                   <button className="link-button" onClick={() => setMode('login')}>Log In</button>
                 </p>
 
@@ -372,7 +365,7 @@ const AuthPage = ({ setUser, setToken }) => {
                     <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
                   </svg>
                 </div>
-                
+
                 <h2 className="form-title">Verify your email</h2>
                 <p className="form-subtitle">
                   We sent a verification code to <strong>{formData.email}</strong>
@@ -400,8 +393,8 @@ const AuthPage = ({ setUser, setToken }) => {
                   </button>
                 </form>
 
-                <button 
-                  className="link-button-center" 
+                <button
+                  className="link-button-center"
                   onClick={() => setMode('signup')}
                 >
                   Back to Sign Up

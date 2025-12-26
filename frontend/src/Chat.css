@@ -25,9 +25,10 @@
     background: linear-gradient(135deg, #c15f3c 0%, #a04d2f 100%);
     color: #ffffff;
     padding: 8px 20px;
-    border-radius: 13%; 
+    border-radius: 4px;
     margin-left: 15rem;
     margin-bottom: 8px;
+    margin-top: 8px;
     max-width: 500px;
     width: fit-content;
 }

@@ -89,7 +89,7 @@ const ChatWindow = () => {
           <button className="menu-toggle" onClick={() => setIsSidebarOpen(true)}>
             <i className="fa-solid fa-bars"></i>
           </button>
-          <span>GemAI <i className="fa-solid fa-chevron-down"></i></span>
+          <img src="/gemAILogo.png" className="logo" alt="GemAI" />
         </div>
         <div className="upgradeDiv">
           <span><button>Upgrade to Plus</button></span>

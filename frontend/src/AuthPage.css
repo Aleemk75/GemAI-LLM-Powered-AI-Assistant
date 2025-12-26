@@ -1,4 +1,3 @@
-
 /* AuthPage.css - Custom Color Palette */
 /* Colors: #c15f3c (Terracotta), #b1ada1 (Sage Gray), #f4f3ee (Off-White), #ffffff (White) */
 
@@ -11,6 +10,7 @@
 .auth-container {
   min-height: 100vh;
   display: flex;
+  background-color: #212121;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
 }
 
@@ -23,7 +23,7 @@
 /* Left Side - Branding */
 .auth-brand {
   flex: 1;
-  background: linear-gradient(135deg, #c15f3c 0%, #a04d2f 100%);
+  background: #1F1E1D;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -63,14 +63,14 @@
 .brand-icon {
   width: 80px;
   height: 80px;
-  background: rgba(244, 243, 238, 0.15);
+  background: transparent;
   border-radius: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 32px;
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(244, 243, 238, 0.2);
+  border: 1px solid rgba(244, 243, 238, 0.1);
 }
 
 .brand-icon svg {
@@ -114,7 +114,7 @@
 /* Right Side - Forms */
 .auth-form-side {
   flex: 1;
-  background: #f4f3ee;
+  background: #262624;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -127,23 +127,23 @@
 }
 
 .auth-form {
-  background: white;
+  background: #1F1E1D;
   border-radius: 12px;
   padding: 48px;
-  box-shadow: 0 4px 16px rgba(193, 95, 60, 0.1);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
   border: 1px solid rgba(177, 173, 161, 0.2);
 }
 
 .form-title {
   font-size: 28px;
   font-weight: 600;
-  color: #2d2d2d;
+  color: #f4f3ee;
   margin-bottom: 8px;
 }
 
 .form-subtitle {
   font-size: 14px;
-  color: #5f5f5f;
+  color: #b1ada1;
   margin-bottom: 32px;
 }
 
@@ -216,19 +216,19 @@
   display: block;
   font-size: 14px;
   font-weight: 500;
-  color: #5f5f5f;
+  color: #b1ada1;
   margin-bottom: 8px;
 }
 
 .form-group input {
   width: 100%;
   padding: 12px 16px;
-  border: 1px solid #d4d4d4;
+  border: 1px solid rgba(177, 173, 161, 0.3);
   border-radius: 8px;
   font-size: 15px;
-  color: #2d2d2d;
+  color: #f4f3ee;
+  background: #30302E;
   transition: all 0.2s;
-  background: white;
 }
 
 .form-group input:focus {
@@ -238,7 +238,8 @@
 }
 
 .form-group input::placeholder {
-  color: #9CA3AF;
+  color: #b1ada1;
+  opacity: 0.7;
 }
 
 /* Buttons */
@@ -251,16 +252,16 @@
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
+  display: block;
+  text-align: center;
 }
 
 .btn-primary {
   background: linear-gradient(135deg, #c15f3c 0%, #a04d2f 100%);
   color: #ffffff;
   border: 1px solid rgba(193, 95, 60, 0.2);
+  width: 100%;
+  margin: 0;
 }
 
 .btn-primary:hover:not(:disabled) {
@@ -283,7 +284,7 @@
   display: flex;
   align-items: center;
   margin: 28px 0;
-  color: #9CA3AF;
+  color: #b1ada1;
   font-size: 13px;
 }
 
@@ -292,11 +293,12 @@
   content: '';
   flex: 1;
   height: 1px;
-  background: #E5E7EB;
+  background: rgba(177, 173, 161, 0.3);
 }
 
 .divider span {
   padding: 0 16px;
+  color: #b1ada1;
 }
 
 /* Google Sign In Button Container */
@@ -306,12 +308,13 @@
   margin-top: 16px;
 
 }
-#googleSignInButton span{
-  color:  #3a3a3a;
+
+#googleSignInButton span {
+  color: #3a3a3a;
   font-weight: 549;
 }
 
-#googleSignInButton > div {
+#googleSignInButton>div {
   width: 100% !important;
 }
 
@@ -406,6 +409,7 @@
     opacity: 0;
     transform: translateY(10px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -418,7 +422,7 @@
 }
 
 .auth-form-side::-webkit-scrollbar-track {
-  background: #f4f3ee;
+  background: #262624;
 }
 
 .auth-form-side::-webkit-scrollbar-thumb {
@@ -444,7 +448,7 @@
 }
 
 .auth-form {
-  box-shadow: 
+  box-shadow:
     0 4px 16px rgba(193, 95, 60, 0.1),
     0 0 0 1px rgba(177, 173, 161, 0.2);
 }
@@ -462,10 +466,11 @@
 
 
 
- .divider span{
+.divider span {
   color: #5f5f5f;
-} 
+}
 
-.googleSignInButton span{
-  background-color: chartreuse;;
+.googleSignInButton span {
+  background-color: chartreuse;
+  ;
 }
