@@ -15,7 +15,7 @@ const generateToken = (userId) => {
     { expiresIn: '7d' }
   );
 };
-
+    
 
 // sign up with email
 export const emailSignup = async (req, res) => {
@@ -56,10 +56,9 @@ export const emailSignup = async (req, res) => {
 
     await redisClient.set(`otp:${email}`, otp, {
       ex: 60,   // expires in 60 seconds
-      nx: true, // only set if not exists (optional)
     });
 
-    console.log(' OTP stored in Upstash Redis');
+    console.log('OTP stored in Upstash Redis');
 
     // send email
      await sendMail(existingUser.email, "Verify your Email", `Your OTP code is ${otp}`);

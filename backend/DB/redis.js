@@ -7,7 +7,7 @@ let redisClient;
 try {
   // Check if Upstash credentials are available
   if (process.env.UPSTASH_REDIS_REST_URL && process.env.UPSTASH_REDIS_REST_TOKEN) {
-    console.log('🔵 Connecting to Upstash Redis...');
+    console.log(' Connecting to Upstash Redis...');
     
     redisClient = new Redis({
       url: process.env.UPSTASH_REDIS_REST_URL,
@@ -25,7 +25,7 @@ try {
     console.warn('Upstash Redis credentials not found');
     
   }} catch (error) {
-  console.error('❌ Redis initialization error:', error);
+  console.error('Redis initialization error:', error);
   
 
   };

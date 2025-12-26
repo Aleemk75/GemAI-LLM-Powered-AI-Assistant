@@ -39,8 +39,6 @@ const userSchema = new mongoose.Schema({
     trim: true,
   },
 
-
-
   emailVerified: {
     type: Boolean,
     default: false,
@@ -86,13 +84,6 @@ userSchema.methods.comparePassword = async function (candidatePassword) {
   return await bcrypt.compare(candidatePassword, this.password);
 };
 
-// // Method to get public profile
-// userSchema.methods.toJSON = function() {
-//   const user = this.toObject();
-//   delete user.password;
-//   delete user.__v;
-//   return user;
-// };
 
 const User = mongoose.model('User', userSchema);
 
