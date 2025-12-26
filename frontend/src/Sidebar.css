@@ -252,6 +252,8 @@ button:focus-visible,
         position: fixed;
         left: 0;
         top: 0;
+        width: 280px;
+        max-width: 85vw;
         transform: translateX(-100%);
     }
 
